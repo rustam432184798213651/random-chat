@@ -1,0 +1,20 @@
+{
+  "name": "random-chat",
+  "private": true,
+  "version": "0.1.0",
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npm run build -w @random-chat/shared && concurrently -n api,web -c blue,green \"npm run dev -w @random-chat/api\" \"npm run dev -w @random-chat/web\"",
+    "build": "npm run build -w @random-chat/shared && npm run build -w @random-chat/api && npm run build -w @random-chat/web",
+    "start:api": "npm run start:prod -w @random-chat/api",
+    "start:web": "npm run start -w @random-chat/web",
+    "db:generate": "npm run prisma:generate -w @random-chat/api",
+    "db:migrate": "npm run prisma:migrate -w @random-chat/api"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.0"
+  }
+}
